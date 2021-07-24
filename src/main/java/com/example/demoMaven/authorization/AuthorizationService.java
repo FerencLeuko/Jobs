@@ -31,7 +31,7 @@ public class AuthorizationService
 	
 	public void validateNameAndEmail( String name, String email ) throws IllegalArgumentException
 	{
-		if ( name.length() < 2 )
+		if ( name.length() > 100 )
 		{
 			throw new IllegalArgumentException( "Name is not accepted" );
 		}
