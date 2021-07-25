@@ -1,8 +1,11 @@
 package com.example.demoMaven.controller;
 
+import java.util.List;
+
 import com.example.demoMaven.authorization.AuthorizationService;
-import com.example.demoMaven.authorization.EmailValidatorService;
+import com.example.demoMaven.bean.Position;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,11 +18,27 @@ public class DemoApiController
 		_authorizationService = authorizationService;
 	}
 	
-	@GetMapping("/getToken")
+	@PostMapping( "/postClient" )
 	@ResponseBody
-	public String getToken(@RequestParam String name, @RequestParam String email ) throws RuntimeException
+	public String postClient(@RequestParam String name, @RequestParam String email ) throws RuntimeException
 	{
 		return _authorizationService.createTokenForUser( name, email );
+	}
+	
+	@PostMapping( "/postPosition" )
+	@ResponseBody
+	public String postPosition(@RequestParam String tokenString, @RequestParam String job,
+			@RequestParam String location ) throws RuntimeException
+	{
+		return null;
+	}
+	
+	@GetMapping( "/getPosition" )
+	@ResponseBody
+	public List<Position> getPosition(@RequestParam String tokenString, @RequestParam String job,
+			@RequestParam String location ) throws RuntimeException
+	{
+		return null;
 	}
 	
 	private final AuthorizationService _authorizationService;
