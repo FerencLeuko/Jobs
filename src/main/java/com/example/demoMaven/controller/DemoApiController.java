@@ -18,14 +18,14 @@ public class DemoApiController
 		_authorizationService = authorizationService;
 	}
 	
-	@PostMapping( "/postClient" )
+	@PostMapping( "/clients" )
 	@ResponseBody
-	public String postClient(@RequestParam String name, @RequestParam String email ) throws RuntimeException
+	public String postClient( @RequestParam String name, @RequestParam String email ) throws RuntimeException
 	{
 		return _authorizationService.createTokenForUser( name, email );
 	}
 	
-	@PostMapping( "/postPosition" )
+	@PostMapping( "/positions" )
 	@ResponseBody
 	public String postPosition(@RequestParam String tokenString, @RequestParam String job,
 			@RequestParam String location ) throws RuntimeException
@@ -33,7 +33,7 @@ public class DemoApiController
 		return null;
 	}
 	
-	@GetMapping( "/getPosition" )
+	@GetMapping( "/positions" )
 	@ResponseBody
 	public List<Position> getPosition(@RequestParam String tokenString, @RequestParam String job,
 			@RequestParam String location ) throws RuntimeException
