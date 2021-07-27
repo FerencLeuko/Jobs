@@ -1,4 +1,4 @@
-package com.example.demoMaven.authorization;
+package com.example.demo.authorization;
 
 import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;

@@ -1,10 +1,11 @@
-package com.example.demoMaven.database;
+package com.example.demo.database.datasource;
 
 import java.util.List;
 
-import com.example.demoMaven.bean.Position;
+import com.example.demo.bean.Position;
+import com.example.demo.database.datasource.DataResource;
 
-class GitDataResource implements DataResource
+class LocalDataBaseResource implements DataResource
 {
 	@Override
 	public String postPosition( String position, String location )

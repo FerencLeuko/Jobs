@@ -1,4 +1,4 @@
-package com.example.demoMaven.bean;
+package com.example.demo.bean;
 
 import lombok.Builder;
 import lombok.Value;

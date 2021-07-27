@@ -1,9 +1,9 @@
-package com.example.demoMaven.controller;
+package com.example.demo.controller;
 
 import java.util.List;
 
-import com.example.demoMaven.authorization.AuthorizationService;
-import com.example.demoMaven.bean.Position;
+import com.example.demo.authorization.AuthorizationService;
+import com.example.demo.bean.Position;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

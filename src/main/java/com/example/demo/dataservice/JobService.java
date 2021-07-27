@@ -1,8 +1,8 @@
-package com.example.demoMaven.dataservice;
+package com.example.demo.dataservice;
 
 import java.util.List;
 
-import com.example.demoMaven.bean.Position;
+import com.example.demo.bean.Position;
 
 public interface JobService
 {

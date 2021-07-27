@@ -1,4 +1,4 @@
-package com.example.demoMaven.authorization;
+package com.example.demo.authorization;
 
 public interface EmailValidatorService
 {

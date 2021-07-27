@@ -1,8 +1,8 @@
-package com.example.demoMaven.database;
+package com.example.demo.database.datasource;
 
 import java.util.List;
 
-import com.example.demoMaven.bean.Position;
+import com.example.demo.bean.Position;
 
 public interface DataResource
 {

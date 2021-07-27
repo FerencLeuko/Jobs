@@ -1,9 +1,11 @@
-package com.example.demoMaven.dataservice;
+package com.example.demo.dataservice;
 
 import java.util.List;
 
-import com.example.demoMaven.bean.Position;
+import com.example.demo.bean.Position;
+import org.springframework.stereotype.Service;
 
+@Service
 public class JobServiceImpl implements JobService
 {
 	@Override
