@@ -1,9 +1,10 @@
-package com.example.demo.dataservice;
+package com.example.demo.operation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.demo.bean.Token;
 import com.example.demo.bean.User;
+import com.example.demo.database.entity.EntityMapper;
 import com.example.demo.database.entity.UserEntity;
 import org.junit.jupiter.api.Test;
 

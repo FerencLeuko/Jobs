@@ -1,6 +1,8 @@
-package com.example.demo.dataservice;
+package com.example.demo.operation;
 
 import com.example.demo.bean.User;
+import com.example.demo.exception.IllegalParameterException;
+import com.example.demo.database.entity.EntityMapper;
 import com.example.demo.database.entity.UserEntity;
 import com.example.demo.database.repository.UserRepository;
 import org.mapstruct.factory.Mappers;
@@ -37,11 +39,11 @@ public class RegistrationServiceImpl implements RegistrationService
 	{
 		if ( !_userRepository.findByName( user.getName() ).isEmpty())
 		{
-			throw new IllegalArgumentException( "username already exists : " + user.getName() );
+			throw new IllegalParameterException( "username already exists : " + user.getName() );
 		}
 		if ( !_userRepository.findByEmail( user.getEmail() ).isEmpty())
 		{
-			throw new IllegalArgumentException( "email already exists : " + user.getEmail() );
+			throw new IllegalParameterException( "email already exists : " + user.getEmail() );
 		}
 	}
 	

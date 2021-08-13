@@ -1,4 +1,4 @@
-package com.example.demo.dataservice;
+package com.example.demo.operation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import com.example.demo.bean.Job;
 import com.example.demo.database.datasource.JobDataService;
 import com.example.demo.database.datasource.JobDataServiceFactory;
 import com.example.demo.database.datasource.LocalJobDataBaseService;
+import com.example.demo.database.entity.EntityMapper;
 import com.example.demo.database.entity.JobEntity;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,7 @@ public class JobServiceImpl implements JobService
 		
 		return jobs.stream()
 				.map( entity -> _entityMapper.entityToJob( entity ) )
+				.distinct()
 				.collect( Collectors.toList());
 	}
 	

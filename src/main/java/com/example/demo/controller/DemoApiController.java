@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.example.demo.authorization.AuthorizationService;
 import com.example.demo.bean.Job;
+import com.example.demo.exception.ErrorResponse;
+import com.example.demo.exception.IllegalParameterException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +42,18 @@ public class DemoApiController
 			@RequestParam String location ) throws RuntimeException
 	{
 		return _authorizationService.getJob( tokenString, position, location );
+	}
+	
+	@ExceptionHandler(  { IllegalParameterException.class } )
+	public ResponseEntity<ErrorResponse> handleArgumentExceptions( IllegalParameterException e )
+	{
+		return new ResponseEntity<ErrorResponse>( new ErrorResponse( e.getMessage() ), HttpStatus.BAD_REQUEST );
+	}
+	
+	@ExceptionHandler(  { RuntimeException.class } )
+	public ResponseEntity<ErrorResponse> handleRuntimeExceptions( RuntimeException e )
+	{
+		return new ResponseEntity<ErrorResponse>( new ErrorResponse( e.getMessage() ), HttpStatus.INTERNAL_SERVER_ERROR );
 	}
 	
 	private final AuthorizationService _authorizationService;

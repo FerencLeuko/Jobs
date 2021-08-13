@@ -1,9 +1,7 @@
-package com.example.demo.dataservice;
+package com.example.demo.database.entity;
 
 import com.example.demo.bean.Job;
 import com.example.demo.bean.User;
-import com.example.demo.database.entity.JobEntity;
-import com.example.demo.database.entity.UserEntity;
 import org.mapstruct.Mapping;
 
 @org.mapstruct.Mapper

@@ -5,8 +5,9 @@ import java.util.List;
 import com.example.demo.bean.Job;
 import com.example.demo.bean.Token;
 import com.example.demo.bean.User;
-import com.example.demo.dataservice.JobService;
-import com.example.demo.dataservice.RegistrationService;
+import com.example.demo.exception.IllegalParameterException;
+import com.example.demo.operation.JobService;
+import com.example.demo.operation.RegistrationService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,9 +27,9 @@ public class AuthorizationServiceImpl implements AuthorizationService
 		{
 			validateNameAndEmail( name, email );
 		}
-		catch( IllegalArgumentException e )
+		catch( IllegalParameterException e )
 		{
-			throw new IllegalArgumentException ( "Incorrect parameters : " + e.getMessage() );
+			throw new IllegalParameterException( "Incorrect user parameters : " + e.getMessage() );
 		}
 		
 		Token token = generateUniqueToken();
@@ -42,6 +43,9 @@ public class AuthorizationServiceImpl implements AuthorizationService
 	public String postJob( String token, Job job )
 	{
 		validateUserToken( token );
+		
+		validateJobRequest( job.getPosition(), job.getLocation() );
+		
 		return _jobService.postJob( job );
 	}
 	
@@ -49,6 +53,9 @@ public class AuthorizationServiceImpl implements AuthorizationService
 	public List<Job> getJob( String token, String keyWord, String location )
 	{
 		validateUserToken( token );
+		
+		validateJobRequest( keyWord, location );
+		
 		return _jobService.getJob( keyWord, location );
 	}
 	
@@ -57,11 +64,11 @@ public class AuthorizationServiceImpl implements AuthorizationService
 	{
 		if ( name.length() > 100 )
 		{
-			throw new IllegalArgumentException( "Name is not accepted" );
+			throw new IllegalParameterException( "Name is not valid, exceeds 100 characters." );
 		}
 		if ( !_emailValidatorService.validateEmail( email ) )
 		{
-			throw new IllegalArgumentException( "Email is not accepted" );
+			throw new IllegalParameterException( "Email is not valid, please check email format." );
 		}
 	}
 	
@@ -69,7 +76,19 @@ public class AuthorizationServiceImpl implements AuthorizationService
 	{
 		if (!_registrationService.checkTokenExists( token ))
 		{
-			throw new IllegalArgumentException( "Token is not valid" );
+			throw new IllegalParameterException( "Token is not valid." );
+		}
+	}
+	
+	private void validateJobRequest( String position, String location)
+	{
+		if( position.length() > 50 )
+		{
+			throw new IllegalParameterException( "Position is not valid, exceeds 50 characters" );
+		}
+		if( location.length() > 50 )
+		{
+			throw new IllegalParameterException( "Location is not valid, exceeds 50 characters." );
 		}
 	}
 	
