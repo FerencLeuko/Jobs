@@ -16,9 +16,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class JobServiceImpl implements JobService
 {
-	public JobServiceImpl( LocalJobDataBaseService localJobDataBaseService )
+	public JobServiceImpl( LocalJobDataBaseService localJobDataBaseService, JobDataServiceFactory jobDataServiceFactory )
 	{
 		_localJobDataBaseService = localJobDataBaseService;
+		_jobDataServiceFactory = jobDataServiceFactory;
 		_jobDataServices = getJobDataServices();
 		_entityMapper = getMapper();
 	}
@@ -50,9 +51,11 @@ public class JobServiceImpl implements JobService
 		return Mappers.getMapper( EntityMapper.class );
 	}
 	
-	private static List<JobDataService> getJobDataServices(){ return JobDataServiceFactory.getDataResources(); }
+	private List<JobDataService> getJobDataServices(){ return _jobDataServiceFactory.getDataResources(); }
 	
 	private final LocalJobDataBaseService _localJobDataBaseService;
+	
+	private final JobDataServiceFactory _jobDataServiceFactory;
 	
 	private static List<JobDataService> _jobDataServices;
 	

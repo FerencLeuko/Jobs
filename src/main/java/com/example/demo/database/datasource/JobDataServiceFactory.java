@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class JobDataServiceFactory
 {
-	public static List<JobDataService> getDataResources()
+	public JobDataServiceFactory( List<JobDataService> jobDataServices, RestTemplate restTemplate )
+	{
+		_restTemplate = restTemplate;
+	}
+	
+	public List<JobDataService> getDataResources()
 	{
 		if ( _jobDataServices == null)
 		{
@@ -17,12 +23,13 @@ public class JobDataServiceFactory
 		return _jobDataServices;
 	}
 	
-	private static void initDataResources()
+	private void initDataResources()
 	{
 		_jobDataServices = new ArrayList<>();
-		_jobDataServices.add( new GitJobDataService() );
+		_jobDataServices.add( new GitJobDataService( _restTemplate ) );
 	}
 	
-	private static List<JobDataService> _jobDataServices;
+	private List<JobDataService> _jobDataServices;
+	private final RestTemplate _restTemplate;
 	
 }
