@@ -38,7 +38,7 @@ public class JobServiceImpl implements JobService
 		jobs.addAll( _localJobDataBaseService.getPosition( keyWord, location ) );
 		
 		_jobDataServices.stream()
-				.peek( resource -> jobs.addAll( resource.getPosition( keyWord, location )) );
+				.forEach( d -> jobs.addAll( d.getPosition( keyWord, location ) ));
 		
 		return jobs.stream()
 				.map( entity -> _entityMapper.entityToJob( entity ) )
@@ -57,7 +57,7 @@ public class JobServiceImpl implements JobService
 	
 	private final JobDataServiceFactory _jobDataServiceFactory;
 	
-	private static List<JobDataService> _jobDataServices;
+	private List<JobDataService> _jobDataServices;
 	
 	protected static EntityMapper _entityMapper;
 }

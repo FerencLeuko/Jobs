@@ -24,21 +24,25 @@ class GitJobDataService implements JobDataService
 	@Override
 	public List<JobEntity> getPosition( String keyWord, String location )
 	{
-		List<JobEntity> jobs = new ArrayList<>();
-		
-		jobs.addAll( getJobs( keyWord, location ) );
-		
-		return jobs;
+		return getJobs( keyWord, location );
 	}
 	
 	@GetMapping("/positions/{description}/{location}")
 	public List<JobEntity> getJobs(@PathVariable String description, @PathVariable String location)
 	{
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("description", description);
-		params.put( "location", location );
+		List<JobEntity> jobs = new ArrayList<>();
 		
-		List<JobEntity> jobs = _restTemplate.getForObject( _apiHost, JobEntityList.class, params ).getJobList();
+		try
+		{
+			Map<String, String> params = new HashMap<String, String>();
+			params.put( "description", description );
+			params.put( "location", location );
+			
+			jobs = _restTemplate.getForObject( _apiHost, JobEntityList.class, params ).getJobList();
+		}
+		catch( RuntimeException e )
+		{
+		}
 		
 		return jobs;
 	}
