@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.demo.database.entity.JobEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ class GitJobDataService implements JobDataService
 	GitJobDataService( RestTemplate restTemplate )
 	{
 		_restTemplate = restTemplate;
-		_apiHost = "https://jobs.github.com";
+		_apiHost ="https://jobs.github.com";
 		init();
 	}
 	
@@ -42,6 +43,7 @@ class GitJobDataService implements JobDataService
 		}
 		catch( RuntimeException e )
 		{
+			// _logger.warn("Unable to retrieve jobs from: " + _apiHost);
 		}
 		
 		return jobs;
@@ -52,6 +54,7 @@ class GitJobDataService implements JobDataService
 		_restTemplate.setUriTemplateHandler( new DefaultUriBuilderFactory( _apiHost ) );
 	}
 	
+	@AllArgsConstructor
 	@Data
 	private static class JobEntityList
 	{
